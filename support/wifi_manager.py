@@ -18,8 +18,6 @@ CALENDAR_API = "http://www.hebcal.com/hebcal/?" + \
                 location["zipcode"] + \
                 ";cfg=json"
 
-print(CALENDAR_API)
-
 
 class WiFiManager(ESP_SPIcontrol):
     def __init__(
