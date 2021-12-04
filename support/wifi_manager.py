@@ -48,17 +48,16 @@ class WiFi(ESP_SPIcontrol):
                 else:
                     raise runtime_error
 
-    def sync_time(self, num_attempts: int = 5) -> bool:
+    def sync_time(self, num_attempts: int = 5) -> None:
         for attempt in range(num_attempts):
             try:
                 self.ntp_time = super().get_time()[0]
-                return True
             except ValueError:
                 if attempt != (num_attempts - 1):
                     print("Failed to sync with NTP server")
                     print("Trying again in 5 seconds")
                     time.sleep(5)
-        return False
+        raise RuntimeError("Could not sync time")
 
     def _update_json(self, month):
         return requests.get(CALENDAR_API.replace("[|MONTH|]", str(month)))["items"]
