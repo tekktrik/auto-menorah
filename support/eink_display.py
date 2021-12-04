@@ -36,6 +36,21 @@ class Screen(SSD1681):
             rotation=180,
         )
 
-class ScreenStorage(SDCard):
 
-    pass
+class ScreenStorage(storage.VfsFat):
+    def __init__(self, spi: SPI, cs_pin: Pin):
+        self.sd_card = SDCard(spi, cs_pin)
+        super().__init__(self.sd_card)
+        storage.mount(self, "/sd")
+
+    def save_lightings(self, datetimes: List[str]):
+        with open(
+            "/sd/candle_lighting_times.json", mode="w", encoding="utf-8"
+        ) as jsonfile:
+            json.dump(datetimes, jsonfile)
+
+    def get_lightings(self):
+        with open(
+            "/sd/candle_lighting_times.json", mode="r", encoding="utf-8"
+        ) as jsonfile:
+            return json.load(jsonfile)
