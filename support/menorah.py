@@ -1,6 +1,7 @@
 try:
     import typing  # pylint = disable:unused-import
     from digitalio import DigitalInOut
+    from adafruit_datetime import datetime
 except ImportError:
     pass
 
