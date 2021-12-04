@@ -69,7 +69,7 @@ class WiFi(ESP_SPIcontrol):
         self._latest_events = self._update_json()
         return self._parse_time_for_night(num_night)
 
-    def get_candle_lighting_time(
+    def get_candle_lighting_times(
         self,
     ) -> List[datetime]:  # TODO: Check and finalize typing
         """Function to grab data on the Hebrew calendar for the dates and times"""
