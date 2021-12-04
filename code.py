@@ -5,6 +5,15 @@ from support.menorah import Menorah
 from support.wifi_manager import WiFi
 from support.eink_display import Screen, ScreenStorage
 
+
+def display_error():
+    # TODO: Write error display code
+    pass
+
+def display_loading():
+    # TODO: Write loading display code
+    pass
+
 def main():
     
     # Get candle lighting times
