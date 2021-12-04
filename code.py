@@ -17,8 +17,6 @@ copi_pin = board.GP19
 cipo_pin = board.GP16
 spi = busio.SPI(sck_pin, copi_pin, cipo_pin)
 
-wifi = WiFi(spi, esp32_cs, esp32_ready, esp32_reset, esp32_gpio0)
-
 # Initialize candles
 shamash = DigitalInOut(board.GP15)
 shamash.direction = Direction.OUTPUT
