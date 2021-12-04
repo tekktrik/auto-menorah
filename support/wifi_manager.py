@@ -66,7 +66,7 @@ class WiFi(ESP_SPIcontrol):
             if event["title"] == ("Chanukah: " + str(num_night) + " Candle"):
                 return datetime.fromisoformat(event["date"])
         self._month_checking += 1
-        self._update_json()
+        self._latest_events = self._update_json()
         return self._parse_time_for_night(num_night)
 
     def get_candle_lighting_time(
