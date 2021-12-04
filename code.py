@@ -43,7 +43,7 @@ screen = Screen(spi, screen_command, screen_cs, screen_reset, screen_busy)
 
 def main():
     
-    # C
+    pass
 
 if __name__ == "__main__":
     main()
