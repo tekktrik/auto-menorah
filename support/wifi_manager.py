@@ -22,6 +22,9 @@ CALENDAR_API: str = "http://www.hebcal.com/hebcal/?" + \
 
 
 class WiFi(ESP_SPIcontrol):
+    """Class for representing the Wi-Fi and the associate functions it provides to the auto-menorah
+    """
+
     def __init__(
         self,
         spi: SPI,
