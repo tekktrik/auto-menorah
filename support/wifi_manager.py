@@ -41,10 +41,12 @@ class WiFi(ESP_SPIcontrol):
             try:
                 self.connect(secrets)
                 break
-            except RuntimeError:
+            except RuntimeError as runtime_error:
                 if attempt != 9:
                     print("Could not connect, retrying in 5 seconds...")
                     time.sleep(5)
+                else:
+                    raise runtime_error
 
     def sync_time(self, num_attempts: int = 5) -> bool:
         for attempt in range(num_attempts):

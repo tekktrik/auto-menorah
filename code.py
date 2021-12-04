@@ -6,6 +6,10 @@ from support.wifi_manager import WiFi
 from support.eink_display import Screen, ScreenStorage
 
 # TODO: INITIALIZATION HERE
+def main():
+    
+    # Get candle lighting times
+    wifi.get_candle_lighting_times()
 
 # Initialize SPI
 sck_pin = board.GP18
@@ -13,11 +17,6 @@ copi_pin = board.GP19
 cipo_pin = board.GP16
 spi = busio.SPI(sck_pin, copi_pin, cipo_pin)
 
-# Initialize ESP32
-esp32_cs = DigitalInOut(board.GP17)
-esp32_ready = DigitalInOut(board.GP20)
-esp32_reset = DigitalInOut(board.GP21)
-esp32_gpio0 = DigitalInOut(board.GP22)
 wifi = WiFi(spi, esp32_cs, esp32_ready, esp32_reset, esp32_gpio0)
 
 # Initialize candles
@@ -41,9 +40,11 @@ screen_busy = board.GP3
 screen = Screen(spi, screen_command, screen_cs, screen_reset, screen_busy)
 #storage = ScreenStorage(spi, sd_cs)
 
-def main():
-    
-    pass
+# Initialize ESP32
+esp32_cs = DigitalInOut(board.GP17)
+esp32_ready = DigitalInOut(board.GP20)
+esp32_reset = DigitalInOut(board.GP21)
+esp32_gpio0 = DigitalInOut(board.GP22)
 
 if __name__ == "__main__":
     main()
