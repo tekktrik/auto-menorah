@@ -75,9 +75,6 @@ class WiFi(ESP_SPIcontrol):
         """Function to grab data on the Hebrew calendar for the dates and times"""
         self._month_checking = 11
         lighting_times = []
-
-        # recursion
-
         self._latest_events = self._update_json()
 
         for night in range(8):
