@@ -18,7 +18,7 @@ esp32_cs = DigitalInOut(board.GP17)
 esp32_ready = DigitalInOut(board.GP20)
 esp32_reset = DigitalInOut(board.GP21)
 esp32_gpio0 = DigitalInOut(board.GP22)
-esp32 = WiFi(spi, esp32_cs, esp32_ready, esp32_reset, esp32_gpio0)
+wifi = WiFi(spi, esp32_cs, esp32_ready, esp32_reset, esp32_gpio0)
 
 # Initialize candles
 shamash = DigitalInOut(board.GP15)
