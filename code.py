@@ -15,11 +15,12 @@ def display_loading():
     pass
 
 def main():
+
+    # Get candle lighting times
+    lighting_times = wifi.get_candle_lighting_times()
     
     while True:
 
-        # Get candle lighting times
-        lighting_times = wifi.get_candle_lighting_times()
 
 # Initialize SPI
 sck_pin = board.GP18
