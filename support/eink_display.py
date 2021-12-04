@@ -1,9 +1,12 @@
+import json
+import time
 from adafruit_ssd1681 import SSD1681
 import displayio
 from adafruit_sdcard import SDCard
+import storage
 
 try:
-    import typing  # pylint: disable=unused-import
+    from typing import List
     from busio import SPI
     from microcontroller import Pin
 except ImportError:
