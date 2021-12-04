@@ -2,7 +2,7 @@ import board
 import busio
 from digitalio import DigitalInOut, Direction
 from support.menorah import Menorah
-from support.wifi_manager import WiFiManager
+from support.wifi_manager import WiFi
 from support.eink_display import Screen, ScreenStorage
 
 # TODO: INITIALIZATION HERE
@@ -18,7 +18,7 @@ esp32_cs = DigitalInOut(board.GP17)
 esp32_ready = DigitalInOut(board.GP20)
 esp32_reset = DigitalInOut(board.GP21)
 esp32_gpio0 = DigitalInOut(board.GP22)
-esp32 = WiFiManager(spi, esp32_cs, esp32_ready, esp32_reset, esp32_gpio0)
+esp32 = WiFi(spi, esp32_cs, esp32_ready, esp32_reset, esp32_gpio0)
 
 # Initialize candles
 shamash = DigitalInOut(board.GP15)
