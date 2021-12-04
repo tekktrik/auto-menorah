@@ -21,7 +21,7 @@ CALENDAR_API: str = "http://www.hebcal.com/hebcal/?" + \
                 ";cfg=json"
 
 
-class WiFiManager(ESP_SPIcontrol):
+class WiFi(ESP_SPIcontrol):
     def __init__(
         self,
         spi: SPI,
