@@ -42,8 +42,8 @@ screen = Screen(spi, screen_command, screen_cs, screen_reset, screen_busy)
 storage = ScreenStorage(spi, sd_cs)
 
 def main():
-    print("Let's see it:")
-    WiFiManager(None, None, None, None, None)
+    
+    # C
 
 if __name__ == "__main__":
     main()
