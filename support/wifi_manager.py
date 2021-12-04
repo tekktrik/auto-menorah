@@ -49,7 +49,7 @@ class WiFi(ESP_SPIcontrol):
     def sync_time(self, num_attempts: int = 5) -> bool:
         for attempt in range(num_attempts):
             try:
-                self._ntp_time = super().get_time()[0]
+                self.ntp_time = super().get_time()[0]
                 return True
             except ValueError:
                 if attempt != (num_attempts - 1):
