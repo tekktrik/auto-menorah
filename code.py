@@ -51,6 +51,10 @@ esp32_cs = DigitalInOut(board.GP17)
 esp32_ready = DigitalInOut(board.GP20)
 esp32_reset = DigitalInOut(board.GP21)
 esp32_gpio0 = DigitalInOut(board.GP22)
+try:
+    wifi = WiFi(spi, esp32_cs, esp32_ready, esp32_reset, esp32_gpio0)
+except RuntimeError:
+    display_error()
 
 if __name__ == "__main__":
     main()
