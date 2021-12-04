@@ -46,7 +46,7 @@ screen_busy = board.GP3
 screen = Screen(spi, screen_command, screen_cs, screen_reset, screen_busy)
 #storage = ScreenStorage(spi, sd_cs)
 
-# Initialize ESP32
+# Initialize ESP32 I/O
 esp32_cs = DigitalInOut(board.GP17)
 esp32_ready = DigitalInOut(board.GP20)
 esp32_reset = DigitalInOut(board.GP21)
