@@ -5,7 +5,6 @@ from support.menorah import Menorah
 from support.wifi_manager import WiFi
 from support.eink_display import Screen, ScreenStorage
 
-# TODO: INITIALIZATION HERE
 def main():
     
     # Get candle lighting times
