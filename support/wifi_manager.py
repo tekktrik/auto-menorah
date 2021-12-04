@@ -31,8 +31,9 @@ class WiFiManager(ESP_SPIcontrol):
         gpio0_dio: Optional[DigitalInOut] = None,
     ):
         super().__init__(spi, cs_dio, ready_dio, reset_dio, gpio0_dio)
-        #requests.set_socket(socket, self)
-        return
+        self.ntp_time = None
+        self._latest_events = None
+        requests.set_socket(socket, self)
         for attempt in range(5):
             try:
                 self.connect(secrets)
