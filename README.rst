@@ -18,8 +18,8 @@ Additionally, it relies on these CircuitPython packages:
 
 * asyncio (CircuitPython 7.1.0-beta.0 or later)
 
-Installation
-============
+Software Installation
+=====================
 
 SW installation instructions
 
