@@ -2,6 +2,7 @@ import board
 import busio
 import time
 from digitalio import DigitalInOut, Direction
+import asyncio
 from support.menorah import Menorah
 from support.wifi_manager import WiFi
 from support.eink_display import Screen, ScreenStorage
@@ -14,7 +15,7 @@ def display_error() -> None:
         menorah.turn_off_candles()
         time.sleep(1)
 
-def display_loading() -> None:
+async def display_loading() -> None:
     while True:
         for num_candles in range(4):
             menorah.light_candles(num_candles)
@@ -24,6 +25,19 @@ def display_loading() -> None:
         for num_candles in range(4, 8):
             menorah.light_candles(num_candles)
             time.sleep(1)
+
+async def setup_connections() -> None:
+    # Try to connect to WiFi network and NTP server
+    try:
+        await wifi.connect_to_network()
+        await wifi.connect_to_ntp()
+    except RuntimeError:
+        display_error()
+
+async def setup_menorah() -> None:
+    loading_task = asyncio.create_task(display_loading())
+    connection_task = asyncio.create_task(setup_connections())
+    await asyncio.gather(loading_task, connection_task)
 
 def main() -> None:
 
@@ -87,13 +101,8 @@ esp32_cs = DigitalInOut(board.GP17)
 esp32_ready = DigitalInOut(board.GP20)
 esp32_reset = DigitalInOut(board.GP21)
 esp32_gpio0 = DigitalInOut(board.GP22)
-
-# Try to connect to WiFi network and sync time
-try:
-    wifi = WiFi(spi, esp32_cs, esp32_ready, esp32_reset, esp32_gpio0)
-    wifi.connect_to_ntp()
-except RuntimeError:
-    display_error()
+wifi = WiFi(spi, esp32_cs, esp32_ready, esp32_reset, esp32_gpio0)
 
 if __name__ == "__main__":
+    asyncio.run(setup_menorah())
     main()

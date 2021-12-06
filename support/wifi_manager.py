@@ -1,5 +1,6 @@
 import json
 import time
+import asyncio
 from adafruit_esp32spi.adafruit_esp32spi import ESP_SPIcontrol
 import adafruit_requests as requests
 import adafruit_esp32spi.adafruit_esp32spi_socket as socket
@@ -35,10 +36,12 @@ class WiFi(ESP_SPIcontrol):
     ):
         super().__init__(spi, cs_dio, ready_dio, reset_dio, gpio0_dio)
         self._latest_events = None
+
+    async def connect_to_network(self) -> None:
         requests.set_socket(socket, self)
         for attempt in range(5):
             try:
-                self.connect(secrets)
+                await self.connect(secrets)
                 break
             except RuntimeError as runtime_error:
                 if attempt != 9:
@@ -47,11 +50,12 @@ class WiFi(ESP_SPIcontrol):
                 else:
                     raise runtime_error
 
-    def connect_to_ntp(self, num_attempts: int = 5) -> None:
+    async def connect_to_ntp(self, num_attempts: int = 5) -> None:
         """"""
         for attempt in range(num_attempts):
             try:
-                super().get_time()
+                await super().get_time()
+                return
             except ValueError:
                 if attempt != (num_attempts - 1):
                     print("Failed to sync with NTP server")
