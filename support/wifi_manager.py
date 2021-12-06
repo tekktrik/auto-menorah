@@ -36,6 +36,7 @@ class WiFi(ESP_SPIcontrol):
     ):
         super().__init__(spi, cs_dio, ready_dio, reset_dio, gpio0_dio)
         self._latest_events = None
+        self._month_checking = 11
 
     async def connect_to_network(self) -> None:
         """Connect to the Wi-Fi network, attempt until connection is made"""
