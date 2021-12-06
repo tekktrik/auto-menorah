@@ -24,6 +24,12 @@ CALENDAR_API: str = (
 class WiFi(ESP_SPIcontrol):
     """Class for representing the Wi-Fi and the associate functions it provides
     to the auto-menorah
+
+    :param SPI spi: The SPI bus object for the board
+    :param DigitalInOut cs_dio: The chip select digital io for the ESP32
+    :param DigitalInOut ready_dio: The READY digital io for the ESP32
+    :param DigitalInOut reset_dio: The RESET digital io for the ESP32
+    :param DigitalInOut gpio0_dio: The GIO0 digital io for the ESP32, optional
     """
 
     def __init__(
