@@ -13,14 +13,14 @@ from adafruit_datetime import timedelta
 try:
     from typing import List
     from digitalio import DigitalInOut
-    from adafruit_datetime import datetime # pylint: disable=ungrouped-imports
+    from adafruit_datetime import datetime  # pylint: disable=ungrouped-imports
 except ImportError:
     pass
 
 
 class Menorah:
     """Class for representing the menorah and manages lighting and flickering the candles
-    
+
     :param DigitalInOut shamash_dio: The shamash candle digital io
     :param List[DigitalInOut] candles_dio: The candles digital ios
     """
