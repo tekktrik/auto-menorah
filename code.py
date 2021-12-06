@@ -1,3 +1,12 @@
+"""
+`code.py`
+================================================================================
+
+Main code for functionality, as well as functionalities involving multiple modules
+
+* Author: Alec Delaney
+"""
+
 import time
 import asyncio
 import board
