@@ -16,6 +16,7 @@ def display_error() -> None:
         menorah.turn_off_candles()
         time.sleep(1)
 
+
 async def display_loading() -> None:
     """Displays loading state using menorah lights"""
     while True:
@@ -28,6 +29,7 @@ async def display_loading() -> None:
             menorah.light_candles(num_candles)
             time.sleep(1)
 
+
 async def setup_connections() -> None:
     """Connect to WiFi network and NTP server"""
     try:
@@ -35,6 +37,7 @@ async def setup_connections() -> None:
         await wifi.connect_to_ntp()
     except RuntimeError:
         display_error()
+
 
 async def setup_menorah() -> None:
     """Set up the menorah and display loading status"""
@@ -51,7 +54,7 @@ def main() -> None:
     # Past candle lighting date, no need to do anything
     if wifi.get_datetime() >= lighting_times[7]:
         return
-    
+
     # Main loop
     while True:
 
@@ -73,6 +76,7 @@ def main() -> None:
                     menorah.sleep_based_on_delta(off_time, wifi.get_datetime())
                 menorah.turn_off_candles()
 
+
 # Initialize SPI
 sck_pin = board.GP18
 copi_pin = board.GP19
@@ -89,7 +93,7 @@ for gpio_num in range(14, 6, -1):
     gpio_dio.direction = Direction.OUTPUT
     candles.append(gpio_dio)
 menorah = Menorah(shamash, candles)
-    
+
 # Initialize screen and screen storage
 screen_command = board.GP6
 screen_cs = board.GP5
