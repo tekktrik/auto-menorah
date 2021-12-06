@@ -51,7 +51,7 @@ class WiFi(ESP_SPIcontrol):
         """"""
         for attempt in range(num_attempts):
             try:
-                super().get_time()[0]
+                super().get_time()
             except ValueError:
                 if attempt != (num_attempts - 1):
                     print("Failed to sync with NTP server")
