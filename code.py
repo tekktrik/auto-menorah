@@ -1,8 +1,8 @@
+import time
+import asyncio
 import board
 import busio
-import time
 from digitalio import DigitalInOut, Direction
-import asyncio
 from support.menorah import Menorah
 from support.wifi_manager import WiFi
 from support.eink_display import Screen, ScreenStorage
