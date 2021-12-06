@@ -26,6 +26,7 @@ class Menorah:
         """Get the time at while candles should be turned off
 
         :param datetime lighting_time: The time at which candles should be lit for that day
+        :return datetime: The associated off time for the candles
         """
         hour_difference: datetime = 29 - lighting_time.hour
         projected_time: datetime = lighting_time + timedelta(hours=hour_difference)
