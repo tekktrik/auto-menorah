@@ -34,7 +34,6 @@ class WiFi(ESP_SPIcontrol):
         gpio0_dio: Optional[DigitalInOut] = None,
     ):
         super().__init__(spi, cs_dio, ready_dio, reset_dio, gpio0_dio)
-        self.ntp_time = None
         self._latest_events = None
         requests.set_socket(socket, self)
         for attempt in range(5):
@@ -51,7 +50,7 @@ class WiFi(ESP_SPIcontrol):
     def sync_time(self, num_attempts: int = 5) -> None:
         for attempt in range(num_attempts):
             try:
-                self.ntp_time = super().get_time()[0]
+                super().get_time()[0]
             except ValueError:
                 if attempt != (num_attempts - 1):
                     print("Failed to sync with NTP server")
