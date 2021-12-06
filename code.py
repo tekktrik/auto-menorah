@@ -99,10 +99,10 @@ screen_command = board.GP6
 screen_cs = board.GP5
 screen_reset = board.GP4
 screen_busy = board.GP3
-#sram_cs = board.GP2
-#sd_cs = board.GP1
+# sram_cs = board.GP2
+# sd_cs = board.GP1
 screen = Screen(spi, screen_command, screen_cs, screen_reset, screen_busy)
-#storage = ScreenStorage(spi, sd_cs)
+# storage = ScreenStorage(spi, sd_cs)
 
 # Initialize ESP32 I/O
 esp32_cs = DigitalInOut(board.GP17)
