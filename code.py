@@ -24,6 +24,7 @@ def main() -> None:
     if wifi.get_datetime() >= lighting_times[7]:
         return
     
+    # Main loop
     while True:
 
 
