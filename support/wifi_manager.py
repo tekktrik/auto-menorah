@@ -13,10 +13,12 @@ try:
 except ImportError:
     pass
 
-CALENDAR_API: str = "http://www.hebcal.com/hebcal/?" \
-                    "v=1;maj=on;min=off;i=off;lg=s;" \
-                    "c=on;year=now;month=[|MONTH|]" \
-                    ";geo=zip;zip={0};cfg=json".format(location)
+CALENDAR_API: str = (
+    "http://www.hebcal.com/hebcal/?"
+    "v=1;maj=on;min=off;i=off;lg=s;"
+    "c=on;year=now;month=[|MONTH|]"
+    ";geo=zip;zip={0};cfg=json".format(location)
+)
 
 
 class WiFi(ESP_SPIcontrol):
