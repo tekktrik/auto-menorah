@@ -91,7 +91,9 @@ class WiFi(ESP_SPIcontrol):
         :return str: The JSON string containing holiday information
         """
 
-        return requests.get(CALENDAR_API.replace("[|MONTH|]", str(self._month_checking)))["items"]
+        return requests.get(
+            CALENDAR_API.replace("[|MONTH|]", str(self._month_checking))
+        )["items"]
 
     def _parse_time_for_night(self, num_night: int) -> datetime:
         """Recursive method for getting the candle lighting time for a specific night
