@@ -43,3 +43,28 @@ class Menorah:
         time_to_sleep = 60 if time_diff_s > 60 else time_diff_s
         if time_to_sleep > 0:
             time.sleep(time_to_sleep)
+
+    def _set_candles(self, num_candles: int, candle_state: bool) -> None:
+        """Sets the state of a given number of candles
+        
+        :param int num_candles: The number of candles to light
+        :param bool candle_state: The candle state to set
+        """
+
+        self.shamash.value = candle_state
+        for candle in self.candles[0:num_candles]:
+            candle.value = candle_state
+
+    def light_candles(self, night_number: int) -> None:
+        """Turns on a given number of candles on the menorah
+        
+        :param int number_number: The Hannukah night number
+        """
+
+        self._set_candles(night_number, True)
+
+    def turn_off_candles(self) -> None:
+        """Turns off all the candles of the menorah
+        """
+
+        self._set_candles(8, False)
