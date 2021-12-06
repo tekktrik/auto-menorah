@@ -17,3 +17,18 @@ This project depends on:
 Additionally, it relies on these CircuitPython packages:
 
 * asyncio (CircuitPython 7.1.0-beta.0 or later)
+
+Installation
+============
+
+SW installation instructions
+
+Building Hardware
+=================
+
+HW installation instructions
+
+Usage
+=====
+
+Menorah usage instructions
