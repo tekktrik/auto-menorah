@@ -1,3 +1,12 @@
+"""
+`eink_display`
+================================================================================
+
+Module for managing the display and related modules, like screen storage
+
+* Author: Alec Delaney
+"""
+
 from adafruit_ssd1681 import SSD1681
 import displayio
 from adafruit_sdcard import SDCard
