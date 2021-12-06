@@ -91,7 +91,7 @@ esp32_gpio0 = DigitalInOut(board.GP22)
 # Try to connect to WiFi network and sync time
 try:
     wifi = WiFi(spi, esp32_cs, esp32_ready, esp32_reset, esp32_gpio0)
-    wifi.sync_time()
+    wifi.connect_to_ntp()
 except RuntimeError:
     display_error()
 

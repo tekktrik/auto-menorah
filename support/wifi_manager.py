@@ -47,7 +47,8 @@ class WiFi(ESP_SPIcontrol):
                 else:
                     raise runtime_error
 
-    def sync_time(self, num_attempts: int = 5) -> None:
+    def connect_to_ntp(self, num_attempts: int = 5) -> None:
+        """"""
         for attempt in range(num_attempts):
             try:
                 super().get_time()[0]
