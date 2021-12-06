@@ -15,8 +15,15 @@ def display_error() -> None:
         time.sleep(1)
 
 def display_loading() -> None:
-    # TODO: Write loading display code
-    pass
+    while True:
+        for num_candles in range(4):
+            menorah.light_candles(num_candles)
+            time.sleep(1)
+        menorah.shamash.value = True
+        time.sleep(1)
+        for num_candles in range(4, 8):
+            menorah.light_candles(num_candles)
+            time.sleep(1)
 
 def main() -> None:
 
