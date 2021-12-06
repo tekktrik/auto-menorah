@@ -61,17 +61,3 @@ class ScreenStorage(storage.VfsFat):
         self.sd_card = SDCard(spi, cs_pin)
         super().__init__(self.sd_card)
         storage.mount(self, "/sd")
-
-    @staticmethod
-    def save_lightings(datetimes: List[str]):
-        with open(
-            "/sd/candle_lighting_times.json", mode="w", encoding="utf-8"
-        ) as jsonfile:
-            json.dump(datetimes, jsonfile)
-
-    @staticmethod
-    def get_lightings():
-        with open(
-            "/sd/candle_lighting_times.json", mode="r", encoding="utf-8"
-        ) as jsonfile:
-            return json.load(jsonfile)
