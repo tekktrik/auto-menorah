@@ -1,3 +1,12 @@
+"""
+`menorah`
+================================================================================
+
+Module for managing lighting and turning off candles
+
+* Author: Alec Delaney
+"""
+
 import time
 from adafruit_datetime import timedelta
 
