@@ -20,7 +20,7 @@ class Menorah:
     @staticmethod
     def get_menorah_off_time(lighting_time: datetime) -> datetime:
         """Get the time at while candles should be turned off
-        
+
         :param datetime lighting_time: The time at which candles should be lit for that day
         """
         hour_difference: datetime = 29 - lighting_time.hour
@@ -33,7 +33,7 @@ class Menorah:
     @staticmethod
     def sleep_based_on_delta(lighting_time: datetime, current_time: datetime) -> None:
         """Sleeps the program for a given amount of time depending on the time delta
-        
+
         :param datetime lighting_time: The time at which candles should be lit for that day
         :param datetime current_time: The current time
         """
@@ -45,7 +45,7 @@ class Menorah:
 
     def _set_candles(self, num_candles: int, candle_state: bool) -> None:
         """Sets the state of a given number of candles
-        
+
         :param int num_candles: The number of candles to light
         :param bool candle_state: The candle state to set
         """
@@ -56,7 +56,7 @@ class Menorah:
 
     def light_candles(self, night_number: int) -> None:
         """Turns on a given number of candles on the menorah
-        
+
         :param int number_number: The Hannukah night number
         """
 
