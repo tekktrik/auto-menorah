@@ -10,9 +10,8 @@ except ImportError:
 
 
 class Menorah:
-    """Class for representing the menorah and manages lighting and flickering the candles
-    """
-    
+    """Class for representing the menorah and manages lighting and flickering the candles"""
+
     def __init__(self, shamash_dio: DigitalInOut, candles_dio: List[DigitalInOut]):
 
         self.shamash = shamash_dio
@@ -64,7 +63,6 @@ class Menorah:
         self._set_candles(night_number, True)
 
     def turn_off_candles(self) -> None:
-        """Turns off all the candles of the menorah
-        """
+        """Turns off all the candles of the menorah"""
 
         self._set_candles(8, False)
