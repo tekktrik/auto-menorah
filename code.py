@@ -9,6 +9,7 @@ from support.eink_display import Screen, ScreenStorage
 
 
 def display_error() -> None:
+    """Displays an error using menorah lights"""
     while True:
         menorah.light_candles(8)
         time.sleep(1)
@@ -16,6 +17,7 @@ def display_error() -> None:
         time.sleep(1)
 
 async def display_loading() -> None:
+    """Displays loading state using menorah lights"""
     while True:
         for num_candles in range(4):
             menorah.light_candles(num_candles)
@@ -27,7 +29,7 @@ async def display_loading() -> None:
             time.sleep(1)
 
 async def setup_connections() -> None:
-    # Try to connect to WiFi network and NTP server
+    """Connect to WiFi network and NTP server"""
     try:
         await wifi.connect_to_network()
         await wifi.connect_to_ntp()
@@ -35,12 +37,14 @@ async def setup_connections() -> None:
         display_error()
 
 async def setup_menorah() -> None:
+    """Set up the menorah and display loading status"""
     loading_task = asyncio.create_task(display_loading())
     connection_task = asyncio.create_task(setup_connections())
     await asyncio.gather(loading_task, connection_task)
 
-def main() -> None:
 
+def main() -> None:
+    """Main function"""
     # Get candle lighting times
     lighting_times = wifi.get_candle_lighting_times()
 
