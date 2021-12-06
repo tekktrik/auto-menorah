@@ -1,14 +1,13 @@
 import json
 import time
-import asyncio
+from secrets import secrets, location
 from adafruit_esp32spi.adafruit_esp32spi import ESP_SPIcontrol
 import adafruit_requests as requests
 import adafruit_esp32spi.adafruit_esp32spi_socket as socket
 from adafruit_datetime import datetime
-from secrets import secrets, location
 
 try:
-    from typing import Optional, Dict, Any, List
+    from typing import Optional, List
     from busio import SPI
     from digitalio import DigitalInOut
 except ImportError:
