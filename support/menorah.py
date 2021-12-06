@@ -20,7 +20,10 @@ class Menorah:
 
     @staticmethod
     def get_menorah_off_time(lighting_time: datetime) -> datetime:
-        """Get the time at while candles should be turned off"""
+        """Get the time at while candles should be turned off
+        
+        :param datetime lighting_time: The time at which candles should be lit for that day
+        """
         hour_difference: datetime = 29 - lighting_time.hour
         projected_time: datetime = lighting_time + timedelta(hours=hour_difference)
         projected_time.minute = 0
