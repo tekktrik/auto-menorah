@@ -1,2 +1,4 @@
-# auto-menorah
- Self-lighting menorah!
+auto-menorah
+============
+
+Self-lighting menorah!
