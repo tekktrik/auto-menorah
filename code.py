@@ -27,6 +27,23 @@ def main() -> None:
     # Main loop
     while True:
 
+        # Compare candle lighting times to current time
+        for lighting in lighting_times:
+
+            current_time = wifi.get_datetime()
+            off_time = menorah.get_menorah_off_time(lighting)
+
+            if current_time < lighting:
+                # Manage turning the candles on at the appropriate time
+                while wifi.get_datetime() < lighting:
+                    menorah.sleep_based_on_delta(lighting, wifi.get_datetime())
+
+                
+
+            if lighting <= current_time < off_time:
+                # Manage turning the candles off at the appropriate time
+                while wifi.get_datetime() < off_time:
+                    menorah.sleep_based_on_delta(off_time, wifi.get_datetime())
 
 # Initialize SPI
 sck_pin = board.GP18
