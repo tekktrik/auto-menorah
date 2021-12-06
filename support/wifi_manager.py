@@ -1,3 +1,12 @@
+"""
+`wifi_manager`
+================================================================================
+
+Module for managing network connections and API requests
+
+* Author: Alec Delaney
+"""
+
 import json
 import time
 from secrets import secrets, location
