@@ -81,3 +81,6 @@ class WiFi(ESP_SPIcontrol):
             lighting_times.append(self._parse_time_for_night(night))
 
         return lighting_times
+
+    def get_datetime(self):
+        return time.localtime(self.get_time()[0])
