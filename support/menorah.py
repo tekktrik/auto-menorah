@@ -2,9 +2,9 @@ import time
 from adafruit_datetime import timedelta
 
 try:
-    from typing  import List
+    from typing import List
     from digitalio import DigitalInOut
-    from adafruit_datetime import datetime
+    from adafruit_datetime import datetime # pylint: disable=ungrouped-imports
 except ImportError:
     pass
 
