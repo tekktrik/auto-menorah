@@ -88,8 +88,8 @@ shamash = DigitalInOut(board.GP15)
 shamash.direction = Direction.OUTPUT
 candles = []
 for gpio_num in range(14, 6, -1):
-    gpio_str = "GP" + str(gpio_num)
-    gpio_dio = DigitalInOut(getattr(board, gpio_str))
+    GPIO_STR = "GP" + str(gpio_num)
+    gpio_dio = DigitalInOut(getattr(board, GPIO_STR))
     gpio_dio.direction = Direction.OUTPUT
     candles.append(gpio_dio)
 menorah = Menorah(shamash, candles)
