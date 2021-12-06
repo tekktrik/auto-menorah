@@ -22,7 +22,8 @@ CALENDAR_API: str = (
 
 
 class WiFi(ESP_SPIcontrol):
-    """Class for representing the Wi-Fi and the associate functions it provides to the auto-menorah
+    """Class for representing the Wi-Fi and the associate functions it provides
+    to the auto-menorah
     """
 
     def __init__(
@@ -37,6 +38,8 @@ class WiFi(ESP_SPIcontrol):
         self._latest_events = None
 
     async def connect_to_network(self) -> None:
+        """Connect to the Wi-Fi network, attempt until connection is made"""
+
         requests.set_socket(socket, self)
         for attempt in range(5):
             try:
@@ -50,7 +53,11 @@ class WiFi(ESP_SPIcontrol):
                     raise runtime_error
 
     async def connect_to_ntp(self, num_attempts: int = 5) -> None:
-        """"""
+        """Connect to NTP server, attempt until connection is made
+
+        :param int num_attempts: The number of connection attempts to make
+        """
+
         for attempt in range(num_attempts):
             try:
                 await super().get_time()
@@ -65,7 +72,9 @@ class WiFi(ESP_SPIcontrol):
     def _update_json(self, month):
         return requests.get(CALENDAR_API.replace("[|MONTH|]", str(month)))["items"]
 
-    def _parse_time_for_night(self, num_night):
+        :param int num_night: The night of Hannukah to look for
+        :return datetime: The datetime for the specific night of Hannukah
+        """
         for event in self._latest_events:
             if event["title"] == ("Chanukah: " + str(num_night) + " Candle"):
                 return datetime.fromisoformat(event["date"])
@@ -76,8 +85,11 @@ class WiFi(ESP_SPIcontrol):
     def get_candle_lighting_times(
         self,
     ) -> List[datetime]:
-        """Function to grab data on the Hebrew calendar for the dates and times"""
-        self._month_checking = 11
+        """Function to grab data on the Hebrew calendar for the dates and times
+
+        :return List[datetime]: A list of candle light datetimes
+        """
+
         lighting_times = []
         self._latest_events = self._update_json()
 
@@ -86,5 +98,10 @@ class WiFi(ESP_SPIcontrol):
 
         return lighting_times
 
-    def get_datetime(self):
+    def get_datetime(self) -> time.struct_time:
+        """Get the current datetime
+
+        :return time.struct_time: The current datetime
+        """
+
         return time.localtime(self.get_time()[0])
