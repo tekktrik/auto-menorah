@@ -8,8 +8,11 @@ from support.eink_display import Screen, ScreenStorage
 
 
 def display_error() -> None:
-    # TODO: Write error display code
-    pass
+    while True:
+        menorah.light_candles(8)
+        time.sleep(1)
+        menorah.turn_off_candles()
+        time.sleep(1)
 
 def display_loading() -> None:
     # TODO: Write loading display code
