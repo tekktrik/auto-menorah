@@ -1,5 +1,6 @@
 import board
 import busio
+import time
 from digitalio import DigitalInOut, Direction
 from support.menorah import Menorah
 from support.wifi_manager import WiFi
