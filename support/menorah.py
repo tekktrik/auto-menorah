@@ -1,7 +1,8 @@
+import time
 from adafruit_datetime import timedelta
 
 try:
-    import typing  # pylint = disable:unused-import
+    from typing  import List
     from digitalio import DigitalInOut
     from adafruit_datetime import datetime
 except ImportError:
