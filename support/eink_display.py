@@ -22,7 +22,7 @@ except ImportError:
 
 class Screen(SSD1681):
     """Class for representing the E-Ink screen on the menorah
-    
+
     :param SPI spi: The SPI bus object for the board
     :param Pin command_pin: The command pin for the e-ink screen
     :param Pin cs_pin: The chip select pin for the e-ink screen
@@ -30,7 +30,7 @@ class Screen(SSD1681):
     :param Pin busy_pin: The BUSY pin for the e-ink screen
     :param int baudrate: The baudrate for the e-ink screen
     """
-    
+
     def __init__(
         self,
         spi: SPI,
@@ -59,11 +59,11 @@ class Screen(SSD1681):
 
 class ScreenStorage(storage.VfsFat):
     """Class for representing the storage on the e-ink breakout
-    
+
     :param SPI spi: The SPI busio object for the board
     :param Pin cs_pin: The chip select pin for the screen storage
     """
-    
+
     def __init__(self, spi: SPI, cs_pin: Pin):
         self.sd_card = SDCard(spi, cs_pin)
         super().__init__(self.sd_card)
