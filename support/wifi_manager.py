@@ -74,7 +74,7 @@ class WiFi(ESP_SPIcontrol):
 
     def get_candle_lighting_times(
         self,
-    ) -> List[datetime]:  # TODO: Check and finalize typing
+    ) -> List[datetime]:
         """Function to grab data on the Hebrew calendar for the dates and times"""
         self._month_checking = 11
         lighting_times = []
