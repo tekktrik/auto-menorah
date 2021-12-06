@@ -69,8 +69,14 @@ class WiFi(ESP_SPIcontrol):
                     time.sleep(5)
         raise RuntimeError("Could not sync time")
 
-    def _update_json(self, month):
-        return requests.get(CALENDAR_API.replace("[|MONTH|]", str(month)))["items"]
+    def _update_json(self) -> str:
+        """Get new JSON from the API
+
+        :return str: The JSON string containing holiday information
+        """
+
+        return requests.get(CALENDAR_API.replace("[|MONTH|]", str(self._month_checking)))["items"]
+
 
         :param int num_night: The night of Hannukah to look for
         :return datetime: The datetime for the specific night of Hannukah
