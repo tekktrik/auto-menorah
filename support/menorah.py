@@ -10,7 +10,11 @@ except ImportError:
 
 
 class Menorah:
-    """Class for representing the menorah and manages lighting and flickering the candles"""
+    """Class for representing the menorah and manages lighting and flickering the candles
+    
+    :param DigitalInOut shamash_dio: The shamash candle digital io
+    :param List[DigitalInOut] candles_dio: The candles digital ios
+    """
 
     def __init__(self, shamash_dio: DigitalInOut, candles_dio: List[DigitalInOut]):
 
