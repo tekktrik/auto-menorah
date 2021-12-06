@@ -6,15 +6,15 @@ from support.wifi_manager import WiFi
 from support.eink_display import Screen, ScreenStorage
 
 
-def display_error():
+def display_error() -> None:
     # TODO: Write error display code
     pass
 
-def display_loading():
+def display_loading() -> None:
     # TODO: Write loading display code
     pass
 
-def main():
+def main() -> None:
 
     # Get candle lighting times
     lighting_times = wifi.get_candle_lighting_times()
