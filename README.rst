@@ -57,10 +57,20 @@ Adding CircuitPython Modules & Drivers
 Adding Code to Board
 --------------------
 
-Add the following files and folders to the CIRCUITPY filesystem:
+Add the following files and folders from the repository to the CIRCUITPY filesystem:
 
-* code.py
-* `support` folder
+* ``code.py`` file
+* ``support`` folder
+
+Additionally, you'll want to add a file named ``secrets.py`` to the filesystem that looks like this:
+
+.. code-block:: python
+
+    secrets = {
+        "ssid": "YourWiFiName",
+        "password": "YourWiFiPassword"
+
+You'll want to update the fields with your Wi-Fi network's name and password accordingly.  Don't share it with anyone!
 
 Building Hardware
 =================
