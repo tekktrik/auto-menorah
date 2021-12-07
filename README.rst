@@ -54,8 +54,13 @@ Adding CircuitPython Modules & Drivers
 | Please ensure all module & driver dependencies are available on the CircuitPython filesystem. This is easily achieved by downloading the Adafruit library and driver bundle:
 | `<https://circuitpython.org/libraries>`_
 
+Adding Code to Board
+--------------------
 
+Add the following files and folders to the CIRCUITPY filesystem:
 
+* code.py
+* `support` folder
 
 Building Hardware
 =================
