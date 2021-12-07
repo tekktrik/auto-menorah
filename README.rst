@@ -42,7 +42,11 @@ Additionally, it relies on these CircuitPython packages:
 Software Installation
 =====================
 
-SW installation instructions
+Installing CircuitPython
+------------------------
+
+You can download the latest version of CircuitPython for the Raspberry Pi Pico `here <https://circuitpython.org/board/raspberry_pi_pico/>`_.
+`<https://circuitpython.org/board/raspberry_pi_pico/>`_
 
 Building Hardware
 =================
