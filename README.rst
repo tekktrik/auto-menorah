@@ -45,8 +45,10 @@ Software Installation
 Installing CircuitPython
 ------------------------
 
-You can download the latest version of CircuitPython for the Raspberry Pi Pico `here <https://circuitpython.org/board/raspberry_pi_pico/>`_.
-`<https://circuitpython.org/board/raspberry_pi_pico/>`_
+You can instructions for installing the latest version of CircuitPython for the Raspberry Pi Pico here:
+`<https://learn.adafruit.com/getting-started-with-raspberry-pi-pico-circuitpython/circuitpython>`_
+
+You can follow the instructions listed here to flash
 
 Building Hardware
 =================
