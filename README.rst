@@ -48,7 +48,12 @@ Installing CircuitPython
 You can instructions for installing the latest version of CircuitPython for the Raspberry Pi Pico here:
 `<https://learn.adafruit.com/getting-started-with-raspberry-pi-pico-circuitpython/circuitpython>`_
 
-You can follow the instructions listed here to flash
+Adding CircuitPython Modules & Drivers
+--------------------------------------
+
+Please ensure all module & driver dependencies are available on the CircuitPython filesystem. This is easily achieved by downloading the Adafruit library and driver bundle:
+`<https://circuitpython.org/libraries>`_
+
 
 Building Hardware
 =================
