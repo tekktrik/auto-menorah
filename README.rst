@@ -8,6 +8,7 @@ Dependencies
 This project depends on:
 
 * `Adafruit CircuitPython <https://github.com/adafruit/circuitpython>`_
+* `CircuitPython Bus Device driver <https://github.com/adafruit/Adafruit_CircuitPython_BusDevice>`_
 * `CircuitPython datetime module <https://github.com/adafruit/Adafruit_CircuitPython_Datetime>`_
 * `CircuitPython ESP32SPI driver <https://github.com/adafruit/Adafruit_CircuitPython_ESP32SPI>`_
 * `CircuitPython requests module <https://github.com/adafruit/Adafruit_CircuitPython_Requests>`_

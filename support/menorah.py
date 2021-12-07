@@ -68,15 +68,16 @@ class Menorah:
         for candle in self.candles[0:num_candles]:
             candle.value = candle_state
 
+    def turn_off_candles(self) -> None:
+        """Turns off all the candles of the menorah"""
+
+        self._set_candles(8, False)
+
     def light_candles(self, night_number: int) -> None:
         """Turns on a given number of candles on the menorah
 
         :param int number_number: The Hannukah night number
         """
-
+        self.turn_off_candles()
         self._set_candles(night_number, True)
 
-    def turn_off_candles(self) -> None:
-        """Turns off all the candles of the menorah"""
-
-        self._set_candles(8, False)
