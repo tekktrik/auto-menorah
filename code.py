@@ -76,30 +76,30 @@ def main() -> None:
     # Get candle lighting times
     lighting_times = wifi.get_candle_lighting_times()
 
+    # Get current time
+    current_time = wifi.get_datetime()
+
     # Past candle lighting date, no need to do anything
     if wifi.get_datetime() >= lighting_times[7]:
         return
 
-    # Main loop
-    while True:
-
-        # Compare candle lighting times to current time
-        for night_number, lighting in enumerate(lighting_times):
+    # Compare candle lighting times to current time
+    for night_number, lighting in enumerate(lighting_times):
 
             current_time = wifi.get_datetime()
-            off_time = menorah.get_menorah_off_time(lighting)
+        off_time = menorah.get_menorah_off_time(lighting)
 
-            if current_time < lighting:
-                # Manage turning the candles on at the appropriate time
-                while wifi.get_datetime() < lighting:
-                    menorah.sleep_based_on_delta(lighting, wifi.get_datetime())
+        if wifi.get_datetime() < lighting:
+            # Manage turning the candles on at the appropriate time
+            while wifi.get_datetime() < lighting:
+                menorah.sleep_based_on_delta(lighting, wifi.get_datetime())
 
-            if lighting <= current_time < off_time:
-                # Manage turning the candles off at the appropriate time
-                menorah.light_candles(night_number)
-                while wifi.get_datetime() < off_time:
-                    menorah.sleep_based_on_delta(off_time, wifi.get_datetime())
-                menorah.turn_off_candles()
+        if lighting <= wifi.get_datetime() < off_time:
+            # Manage turning the candles off at the appropriate time
+            menorah.light_candles(night_number)
+            while wifi.get_datetime() < off_time:
+                menorah.sleep_based_on_delta(off_time, wifi.get_datetime())
+            menorah.turn_off_candles()
 
 
 # Initialize SPI
