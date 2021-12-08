@@ -51,9 +51,10 @@ class Menorah:
         :param datetime lighting_time: The time at which candles should be lit for that day
         :param datetime current_time: The current time
         """
-        time_diff: timedelta = lighting_time - current_time
-        time_diff_s = time_diff.total_seconds()
-        time_to_sleep = 60 if time_diff_s > 60 else time_diff_s
+        #time_diff: timedelta = lighting_time - current_time # TODO: Fix to mix naive and timezone aware
+        #time_diff_s = time_diff.total_seconds()
+        #time_to_sleep = 60 if time_diff_s > 60 else time_diff_s
+        time_to_sleep = 15 # TODO: Fix the god awful code
         if time_to_sleep > 0:
             time.sleep(time_to_sleep)
 
