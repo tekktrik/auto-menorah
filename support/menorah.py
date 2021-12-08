@@ -57,14 +57,16 @@ class Menorah:
         if time_to_sleep > 0:
             time.sleep(time_to_sleep)
 
-    def _set_candles(self, num_candles: int, candle_state: bool) -> None:
+    def _set_candles(self, num_candles: int, candle_state: bool, light_shamash: bool = True) -> None:
         """Sets the state of a given number of candles
 
         :param int num_candles: The number of candles to light
         :param bool candle_state: The candle state to set
+        :param bool light_shamash: Whether the shamash should also be lit, if other candles are
         """
 
-        self.shamash.value = candle_state
+        shamash_setting = light_shamash if candle_state else False
+        self.set_shamash(shamash_setting)
         for candle in self.candles[0:num_candles]:
             candle.value = candle_state
 
@@ -73,11 +75,18 @@ class Menorah:
 
         self._set_candles(8, False)
 
-    def light_candles(self, night_number: int) -> None:
+    def light_candles(self, night_number: int, light_shamash: bool = True) -> None:
         """Turns on a given number of candles on the menorah
 
         :param int number_number: The Hannukah night number
         """
         self.turn_off_candles()
-        self._set_candles(night_number, True)
+        self._set_candles(night_number, True, light_shamash = light_shamash)
 
+    def set_shamash(self, candle_setting: bool):
+        """Sets the shamash setting
+        
+        :param bool candle_setting: The candle state to set
+        """
+
+        self.shamash.value = candle_setting
