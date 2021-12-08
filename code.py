@@ -26,17 +26,21 @@ def display_error() -> None:
         time.sleep(1)
 
 
-async def display_loading() -> None:
-    """Displays loading state using menorah lights"""
+async def display_loading(interval: float = 1) -> None:
+    """Displays loading state using menorah lights
+    
+    :param float interval: How long to wait between lighting state changes
+    """
+
     while True:
-        for num_candles in range(4):
-            menorah.light_candles(num_candles)
-            time.sleep(1)
-        menorah.shamash.value = True
-        time.sleep(1)
-        for num_candles in range(4, 8):
-            menorah.light_candles(num_candles)
-            time.sleep(1)
+        for num_candles in range(1, 5):
+            menorah.light_candles(num_candles, light_shamash=False)
+            time.sleep(interval)
+        menorah.set_shamash(True)
+        time.sleep(interval)
+        for num_candles in range(5, 9):
+            menorah.light_candles(num_candles, light_shamash=True)
+            time.sleep(interval)
 
 
 async def setup_connections() -> None:
