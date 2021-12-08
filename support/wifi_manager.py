@@ -77,7 +77,7 @@ class WiFi(ESP_SPIcontrol):
 
         for attempt in range(num_attempts):
             try:
-                await super().get_time()
+                super().get_time()[0]
                 return
             except ValueError:
                 if attempt != (num_attempts - 1):
