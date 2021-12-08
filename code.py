@@ -76,9 +76,6 @@ def main() -> None:
     # Get candle lighting times
     lighting_times = wifi.get_candle_lighting_times()
 
-    # Get current time
-    current_time = wifi.get_datetime()
-
     # Past candle lighting date, no need to do anything
     if wifi.get_datetime() >= lighting_times[7]:
         return
