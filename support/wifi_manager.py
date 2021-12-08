@@ -60,7 +60,7 @@ class WiFi(ESP_SPIcontrol):
         requests.set_socket(socket, self)
         for attempt in range(5):
             try:
-                await self.connect(secrets)
+                self.connect(secrets)
                 break
             except RuntimeError as runtime_error:
                 if attempt != 9:
