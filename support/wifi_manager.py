@@ -69,7 +69,7 @@ class WiFi(ESP_SPIcontrol):
                 else:
                     raise runtime_error
 
-    async def connect_to_ntp(self, num_attempts: int = 5) -> None:
+    async def connect_to_ntp(self, num_attempts: int = 10) -> None:
         """Connect to NTP server, attempt until connection is made
 
         :param int num_attempts: The number of connection attempts to make
