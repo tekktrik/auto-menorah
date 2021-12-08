@@ -124,8 +124,8 @@ class WiFi(ESP_SPIcontrol):
         lighting_times = []
         self._latest_events = self._update_json()
 
-        for night in range(8):
-            lighting_times.append(self._parse_time_for_night(night))
+        for night_index in range(8):
+            lighting_times.append(self._parse_time_for_night(night_index + 1))
 
         return lighting_times
 
