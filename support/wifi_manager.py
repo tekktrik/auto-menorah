@@ -129,10 +129,12 @@ class WiFi(ESP_SPIcontrol):
 
         return lighting_times
 
-    def get_datetime(self) -> time.struct_time:
+    def get_datetime(self) -> datetime:
         """Get the current datetime
 
         :return time.struct_time: The current datetime
         """
 
-        return time.localtime(self.get_time()[0])
+        naive_datetime: datetime = datetime._fromtimestamp(self.get_time()[0], False, None)
+        aware_datetime = naive_datetime._tzinfo = timezone.utc
+        return aware_datetime
