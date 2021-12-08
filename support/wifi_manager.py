@@ -108,7 +108,6 @@ class WiFi(ESP_SPIcontrol):
             title_option_1 = "Chanukah: " + str(num_night) + " Candle"
             title_option_2 = "Chanukah: " + str(num_night) + " Candles"
             if event["title"] == title_option_1 or event["title"] == title_option_2:
-                print("Found for night num", num_night)
                 return datetime.fromisoformat(event["date"])
         self._month_checking += 1
         self._latest_events = self._update_json()
