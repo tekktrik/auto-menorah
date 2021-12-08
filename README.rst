@@ -34,6 +34,7 @@ This project depends on:
 * `CircuitPython requests module <https://github.com/adafruit/Adafruit_CircuitPython_Requests>`_
 * `CircuitPython sd module <https://github.com/adafruit/Adafruit_CircuitPython_SD>`_
 * `CircuitPython SSD1681 driver <https://github.com/adafruit/Adafruit_CircuitPython_SSD1681>`_
+* `CircuitPython ticks module <https://github.com/adafruit/Adafruit_CircuitPython_ticks>`_
 
 Additionally, it relies on these CircuitPython packages:
 
