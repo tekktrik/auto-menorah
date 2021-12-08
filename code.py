@@ -91,9 +91,9 @@ def main() -> None:
 
 
 # Initialize SPI
-sck_pin = board.GP18
-copi_pin = board.GP19
-cipo_pin = board.GP16
+sck_pin = board.GP2
+copi_pin = board.GP3
+cipo_pin = board.GP0
 spi = busio.SPI(sck_pin, copi_pin, cipo_pin)
 
 # Initialize candles
