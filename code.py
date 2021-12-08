@@ -28,13 +28,14 @@ def display_error() -> None:
         time.sleep(1)
 
 
-async def display_loading(interval: float = 1) -> None:
+async def display_loading(setup_status: ConnectionStatus, interval: float = 1) -> None:
     """Displays loading state using menorah lights
     
+    :param ConnectonStatus setup_status: The ConnectionStatus linking the setup methods
     :param float interval: How long to wait between lighting state changes
     """
 
-    while True:
+    while not setup_status.is_connected:
         for num_candles in range(1, 5):
             menorah.light_candles(num_candles, light_shamash=False)
             time.sleep(interval)
@@ -45,19 +46,24 @@ async def display_loading(interval: float = 1) -> None:
             time.sleep(interval)
 
 
-async def setup_connections() -> None:
-    """Connect to WiFi network and NTP server"""
+async def setup_connections(setup_status: ConnectionStatus) -> None:
+    """Connect to WiFi network and NTP server
+    
+    :param ConnectionStatus setup_status: The ConnectionStatus linking the setup methods
+    """
+
     try:
         await wifi.connect_to_network()
         await wifi.connect_to_ntp()
+        setup_status.is_connected = True
     except RuntimeError:
         display_error()
 
 
 async def setup_menorah() -> None:
     """Set up the menorah and display loading status"""
-    loading_task = asyncio.create_task(display_loading())
-    connection_task = asyncio.create_task(setup_connections())
+    loading_task = asyncio.create_task(display_loading(connection_status))
+    connection_task = asyncio.create_task(setup_connections(connection_status))
     await asyncio.gather(loading_task, connection_task)
 
 
