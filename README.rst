@@ -37,7 +37,10 @@ This project depends on:
 
 Additionally, it relies on these CircuitPython packages:
 
-* asyncio (CircuitPython 7.1.0-beta.0 or later)
+* `asyncio <https://github.com/adafruit/Adafruit_CircuitPython_asyncio>`_
+
+Currently, to use ``asyncio``, you'll need to download the repository as a ZIP file, and extract and move the
+``asyncio`` folder into the ``lib`` folder on your board as you would any other CircuitPython module or driver.
 
 Software Installation
 =====================
