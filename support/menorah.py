@@ -79,6 +79,7 @@ class Menorah:
         """Turns on a given number of candles on the menorah
 
         :param int number_number: The Hannukah night number
+        :param bool light_shamash: Whether the shamash should be lit
         """
         self.turn_off_candles()
         self._set_candles(night_number, True, light_shamash = light_shamash)
