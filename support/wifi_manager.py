@@ -136,6 +136,6 @@ class WiFi(ESP_SPIcontrol):
         :return time.struct_time: The current datetime
         """
 
-        naive_datetime: datetime = datetime._fromtimestamp(self.get_time()[0], False, None)
-        aware_datetime = naive_datetime._tzinfo = timezone.utc
-        return aware_datetime
+        current_datetime: datetime = datetime._fromtimestamp(self.get_time()[0], False, None)
+        current_datetime._tzinfo = timezone.utc
+        return current_datetime
