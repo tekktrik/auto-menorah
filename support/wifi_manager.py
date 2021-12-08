@@ -65,7 +65,7 @@ class WiFi(ESP_SPIcontrol):
             except RuntimeError as runtime_error:
                 if attempt != 9:
                     print("Could not connect, retrying in 5 seconds...")
-                    time.sleep(5)
+                    await asyncio.sleep(5)
                 else:
                     raise runtime_error
 
@@ -83,7 +83,7 @@ class WiFi(ESP_SPIcontrol):
                 if attempt != (num_attempts - 1):
                     print("Failed to sync with NTP server")
                     print("Trying again in 5 seconds")
-                    time.sleep(5)
+                    await asyncio.sleep(10)
         raise RuntimeError("Could not sync time")
 
     def _update_json(self) -> str:
