@@ -11,9 +11,11 @@ import time
 import asyncio
 import board
 import busio
+from adafruit_datetime import datetime, timezone
 from digitalio import DigitalInOut, Direction
 from support.menorah import Menorah
 from support.wifi_manager import WiFi
+from support.setup_helper import ConnectionStatus
 from support.eink_display import Screen, ScreenStorage
 
 
