@@ -39,9 +39,9 @@ class Menorah:
         """
         hour_difference: datetime = 29 - lighting_time.hour
         projected_time: datetime = lighting_time + timedelta(hours=hour_difference)
-        projected_time.minute = 0
-        projected_time.second = 0
-        projected_time.microsecond = 0
+        projected_time._minute = 0
+        projected_time._second = 0
+        projected_time._microsecond = 0
         return projected_time
 
     @staticmethod
