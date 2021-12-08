@@ -105,7 +105,9 @@ class WiFi(ESP_SPIcontrol):
         :return datetime: The datetime for the specific night of Hannukah
         """
         for event in self._latest_events:
-            if event["title"] == ("Chanukah: " + str(num_night) + " Candle"):
+            title_option_1 = "Chanukah: " + str(num_night) + " Candle"
+            title_option_2 = "Chanukah: " + str(num_night) + " Candles"
+            if event["title"] == title_option_1 or event["title"] == title_option_2:
                 return datetime.fromisoformat(event["date"])
         self._month_checking += 1
         self._latest_events = json.loads(self._update_json())
