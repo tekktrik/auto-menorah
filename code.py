@@ -83,7 +83,6 @@ def main() -> None:
     # Compare candle lighting times to current time
     for night_number, lighting in enumerate(lighting_times):
 
-            current_time = wifi.get_datetime()
         off_time = menorah.get_menorah_off_time(lighting)
 
         if wifi.get_datetime() < lighting:
