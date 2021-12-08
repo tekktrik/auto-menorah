@@ -69,6 +69,10 @@ async def setup_menorah() -> None:
 
 def main() -> None:
     """Main function"""
+
+    # Turn off lights
+    menorah.turn_off_candles()
+
     # Get candle lighting times
     lighting_times = wifi.get_candle_lighting_times()
 
