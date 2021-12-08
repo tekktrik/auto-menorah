@@ -71,7 +71,11 @@ Additionally, you'll want to add a file named ``secrets.py`` to the filesystem t
         "password": "YourWiFiPassword"
     }
 
-You'll want to update the fields with your Wi-Fi network's name and password accordingly.  Don't share it with anyone!
+    location = {
+        "zipcode" = "Your5DigitZipcode"
+    }
+
+You'll want to update the fields with your Wi-Fi network's name and password, and zipcode accordingly.  Don't share it with anyone!
 
 Building Hardware
 =================
