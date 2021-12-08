@@ -132,6 +132,8 @@ esp32_reset = DigitalInOut(board.GP21)
 esp32_gpio0 = DigitalInOut(board.GP22)
 wifi = WiFi(spi, esp32_cs, esp32_ready, esp32_reset, esp32_gpio0)
 
+connection_status = ConnectionStatus()
+
 if __name__ == "__main__":
     asyncio.run(setup_menorah())
     main()
