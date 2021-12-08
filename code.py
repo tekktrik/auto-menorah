@@ -118,7 +118,7 @@ menorah = Menorah(shamash, candles)
 # storage = ScreenStorage(spi, sd_cs)
 
 # Initialize ESP32 I/O
-esp32_cs = DigitalInOut(board.GP17)
+esp32_cs = DigitalInOut(board.GP1)
 esp32_ready = DigitalInOut(board.GP20)
 esp32_reset = DigitalInOut(board.GP21)
 esp32_gpio0 = DigitalInOut(board.GP22)
