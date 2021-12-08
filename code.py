@@ -108,13 +108,13 @@ for gpio_num in range(14, 6, -1):
 menorah = Menorah(shamash, candles)
 
 # Initialize screen and screen storage
-screen_command = board.GP6
-screen_cs = board.GP5
-screen_reset = board.GP4
-screen_busy = board.GP3
+#screen_command = board.GP6
+#screen_cs = board.GP5
+#screen_reset = board.GP4
+#screen_busy = board.GP3
 # sram_cs = board.GP2
 # sd_cs = board.GP1
-screen = Screen(spi, screen_command, screen_cs, screen_reset, screen_busy)
+#screen = Screen(spi, screen_command, screen_cs, screen_reset, screen_busy)
 # storage = ScreenStorage(spi, sd_cs)
 
 # Initialize ESP32 I/O
