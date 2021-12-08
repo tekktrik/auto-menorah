@@ -9,11 +9,12 @@ Module for managing network connections and API requests
 
 import json
 import time
+import asyncio
 from secrets import secrets, location
 from adafruit_esp32spi.adafruit_esp32spi import ESP_SPIcontrol
 import adafruit_requests as requests
 import adafruit_esp32spi.adafruit_esp32spi_socket as socket
-from adafruit_datetime import datetime
+from adafruit_datetime import datetime, timezone
 
 try:
     from typing import Optional, List
