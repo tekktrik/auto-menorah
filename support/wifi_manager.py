@@ -23,13 +23,6 @@ try:
 except ImportError:
     pass
 
-CALENDAR_API: str = (
-    "http://www.hebcal.com/hebcal?"
-    "v=1;maj=on;min=off;i=off;lg=s;"
-    "c=on;year=now;month=[|MONTH|]"
-    ";geo=zip;zip={0};cfg=json".format(location["zipcode"])
-)
-
 
 class WiFi(ESP_SPIcontrol):
     """Class for representing the Wi-Fi and the associate functions it provides
@@ -92,9 +85,14 @@ class WiFi(ESP_SPIcontrol):
         :return str: The JSON string containing holiday information
         """
 
-        api_response: requests.Response = requests.get(
-            CALENDAR_API.replace("[|MONTH|]", str(self._month_checking))
+        calendar_api: str = (
+            "http://www.hebcal.com/hebcal?"
+            "v=1;maj=on;min=off;i=off;lg=s;"
+            "c=on;year=now;month={0}"
+            ";geo=zip;zip={1};cfg=json".format(self._month_checking, location["zipcode"])
         )
+
+        api_response: requests.Response = requests.get(calendar_api)
 
         return api_response.json()["items"]
 
