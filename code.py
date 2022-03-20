@@ -10,7 +10,6 @@ Main code for functionality, as well as functionalities involving multiple modul
 import time
 import asyncio
 import board
-import busio
 from adafruit_datetime import datetime, timezone
 from digitalio import DigitalInOut, Direction
 from support.menorah import Menorah
@@ -80,7 +79,7 @@ def main() -> None:
         return
 
     # Compare candle lighting times to current time
-    for night_number, lighting in enumerate(lighting_times):
+    for night_index, lighting in enumerate(lighting_times):
 
         off_time = menorah.get_menorah_off_time(lighting)
 
@@ -91,17 +90,10 @@ def main() -> None:
 
         if lighting <= wifi.get_datetime() < off_time:
             # Manage turning the candles off at the appropriate time
-            menorah.light_candles(night_number)
+            menorah.light_candles(night_index + 1)
             while wifi.get_datetime() < off_time:
                 menorah.sleep_based_on_delta(off_time, wifi.get_datetime())
             menorah.turn_off_candles()
-
-
-# Initialize SPI
-#sck_pin = board.GP2
-#copi_pin = board.GP3
-#cipo_pin = board.GP0
-#spi = busio.SPI(sck_pin, copi_pin, cipo_pin)
 
 # Initialize candles
 shamash = DigitalInOut(board.IO14)
@@ -114,22 +106,6 @@ for gpio_num in candles_pins:
     candles_dios.append(gpio_dio)
 menorah = Menorah(shamash, candles_dios)
 
-# Initialize screen and screen storage
-#screen_command = board.GP6
-#screen_cs = board.GP5
-#screen_reset = board.GP4
-#screen_busy = board.GP3
-# sram_cs = board.GP2
-# sd_cs = board.GP1
-#screen = Screen(spi, screen_command, screen_cs, screen_reset, screen_busy)
-# storage = ScreenStorage(spi, sd_cs)
-
-# Initialize ESP32 I/O
-#esp32_cs = DigitalInOut(board.GP1)
-#esp32_ready = DigitalInOut(board.GP20)
-#esp32_reset = DigitalInOut(board.GP21)
-#esp32_gpio0 = DigitalInOut(board.GP22)
-#wifi = WiFi(spi, esp32_cs, esp32_ready, esp32_reset, esp32_gpio0)
 wifi = WiFi()
 
 connection_status = ConnectionStatus()

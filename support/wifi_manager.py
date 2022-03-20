@@ -10,14 +10,12 @@ Module for managing network connections and API requests
 import json
 import socketpool
 import wifi
-import time
 import ssl
 import asyncio
 from secrets import secrets, location
-from adafruit_esp32spi.adafruit_esp32spi import ESP_SPIcontrol
 import adafruit_requests as requests
 import adafruit_esp32spi.adafruit_esp32spi_socket as socket
-from adafruit_datetime import datetime, timezone
+from adafruit_datetime import datetime, timezone, timedelta
 
 try:
     from typing import Optional, List
@@ -62,7 +60,6 @@ class WiFi:
     async def connect_to_network(self) -> None:
         """Connect to the Wi-Fi network, attempt until connection is made"""
 
-        #requests.set_socket(socket, self)
         for attempt in range(5):
             try:
                 wifi.radio.connect(secrets["ssid"], secrets["password"])
@@ -76,23 +73,6 @@ class WiFi:
                     await asyncio.sleep(5)
                 else:
                     raise runtime_error
-
-    #async def connect_to_aio(self, num_attempts: int = 10) -> None:
-    #    """Connect to NTP server, attempt until connection is made
-    #
-    #    :param int num_attempts: The number of connection attempts to make
-    #    """
-    #
-    #    for attempt in range(num_attempts):
-    #        try:
-    #            super().get_time()[0]
-    #            return
-    #        except ValueError:
-    #            if attempt != (num_attempts - 1):
-    #                print("Failed to sync with NTP server")
-    #                print("Trying again in 5 seconds")
-    #                await asyncio.sleep(10)
-    #    raise RuntimeError("Could not sync time")
 
     def _update_json(self) -> str:
         """Get new JSON from the API
@@ -151,8 +131,18 @@ class WiFi:
 
         current_datetime: datetime = datetime.fromisoformat(self.get_time())
         current_datetime._tzinfo = timezone.utc
+
+        # add_delta = timedelta(275, hours=12)
+        # current_datetime += add_delta
+        # print(current_datetime)
+
         return current_datetime
         
     def get_time(self) -> str:
+        """Get the time from Adafruit IO in ISO format
+        
+        :return str: The time as an ISO format string
+        """
+        
         response = self.requests.get(TIME_URL)
         return response.text
