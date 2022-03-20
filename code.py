@@ -16,7 +16,6 @@ from digitalio import DigitalInOut, Direction
 from support.menorah import Menorah
 from support.wifi_manager import WiFi
 from support.setup_helper import ConnectionStatus
-from support.eink_display import Screen, ScreenStorage
 
 
 def display_error() -> None:
@@ -54,7 +53,7 @@ async def setup_connections(setup_status: ConnectionStatus) -> None:
 
     try:
         await wifi.connect_to_network()
-        await wifi.connect_to_ntp()
+        #await wifi.connect_to_ntp()
         setup_status.is_connected = True
     except RuntimeError:
         display_error()
@@ -99,21 +98,21 @@ def main() -> None:
 
 
 # Initialize SPI
-sck_pin = board.GP2
-copi_pin = board.GP3
-cipo_pin = board.GP0
-spi = busio.SPI(sck_pin, copi_pin, cipo_pin)
+#sck_pin = board.GP2
+#copi_pin = board.GP3
+#cipo_pin = board.GP0
+#spi = busio.SPI(sck_pin, copi_pin, cipo_pin)
 
 # Initialize candles
-shamash = DigitalInOut(board.GP15)
+shamash = DigitalInOut(board.IO14)
 shamash.direction = Direction.OUTPUT
-candles = []
-for gpio_num in range(14, 6, -1):
-    GPIO_STR = "GP" + str(gpio_num)
-    gpio_dio = DigitalInOut(getattr(board, GPIO_STR))
+candles_pins = ["IO4", "IO5", "IO6", "IO7", "IO17", "IO0", "IO33", "IO38"]
+candles_dios = []
+for gpio_num in candles_pins:
+    gpio_dio = DigitalInOut(getattr(board, gpio_num))
     gpio_dio.direction = Direction.OUTPUT
-    candles.append(gpio_dio)
-menorah = Menorah(shamash, candles)
+    candles_dios.append(gpio_dio)
+menorah = Menorah(shamash, candles_dios)
 
 # Initialize screen and screen storage
 #screen_command = board.GP6
@@ -126,11 +125,12 @@ menorah = Menorah(shamash, candles)
 # storage = ScreenStorage(spi, sd_cs)
 
 # Initialize ESP32 I/O
-esp32_cs = DigitalInOut(board.GP1)
-esp32_ready = DigitalInOut(board.GP20)
-esp32_reset = DigitalInOut(board.GP21)
-esp32_gpio0 = DigitalInOut(board.GP22)
-wifi = WiFi(spi, esp32_cs, esp32_ready, esp32_reset, esp32_gpio0)
+#esp32_cs = DigitalInOut(board.GP1)
+#esp32_ready = DigitalInOut(board.GP20)
+#esp32_reset = DigitalInOut(board.GP21)
+#esp32_gpio0 = DigitalInOut(board.GP22)
+#wifi = WiFi(spi, esp32_cs, esp32_ready, esp32_reset, esp32_gpio0)
+wifi = WiFi()
 
 connection_status = ConnectionStatus()
 

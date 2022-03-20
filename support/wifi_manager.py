@@ -8,7 +8,10 @@ Module for managing network connections and API requests
 """
 
 import json
+import socketpool
+import wifi
 import time
+import ssl
 import asyncio
 from secrets import secrets, location
 from adafruit_esp32spi.adafruit_esp32spi import ESP_SPIcontrol
@@ -23,8 +26,15 @@ try:
 except ImportError:
     pass
 
+# Get our username, key and desired timezone
+aio_username = secrets["aio_username"]
+aio_key = secrets["aio_key"]
+TIME_URL = "https://io.adafruit.com/api/v2/%s/integrations/time/clock?x-aio-key=%s" % (aio_username, aio_key)
+TIME_URL += "&fmt=%25Y-%25m-%25dT%25H%3A%25M%3A%25S.%25L%25z"
 
-class WiFi(ESP_SPIcontrol):
+
+#class WiFi(ESP_SPIcontrol):
+class WiFi:
     """Class for representing the Wi-Fi and the associate functions it provides
     to the auto-menorah
 
@@ -35,25 +45,30 @@ class WiFi(ESP_SPIcontrol):
     :param DigitalInOut gpio0_dio: The GIO0 digital io for the ESP32, optional
     """
 
-    def __init__(
-        self,
-        spi: SPI,
-        cs_dio: DigitalInOut,
-        ready_dio: DigitalInOut,
-        reset_dio: DigitalInOut,
-        gpio0_dio: Optional[DigitalInOut] = None,
-    ):
-        super().__init__(spi, cs_dio, ready_dio, reset_dio, gpio0_dio)
+    #def __init__(
+    #    self,
+    #    spi: SPI,
+    #    cs_dio: DigitalInOut,
+    #    ready_dio: DigitalInOut,
+    #    reset_dio: DigitalInOut,
+    #    gpio0_dio: Optional[DigitalInOut] = None,
+    #):
+    def __init__(self):
+        #super().__init__(spi, cs_dio, ready_dio, reset_dio, gpio0_dio)
         self._latest_events = None
         self._month_checking = 11
+        self.requests = None
 
     async def connect_to_network(self) -> None:
         """Connect to the Wi-Fi network, attempt until connection is made"""
 
-        requests.set_socket(socket, self)
+        #requests.set_socket(socket, self)
         for attempt in range(5):
             try:
-                self.connect(secrets)
+                wifi.radio.connect(secrets["ssid"], secrets["password"])
+                pool = socketpool.SocketPool(wifi.radio)
+                context = ssl.create_default_context()
+                self.requests = requests.Session(pool, context)
                 break
             except RuntimeError as runtime_error:
                 if attempt != 9:
@@ -62,22 +77,22 @@ class WiFi(ESP_SPIcontrol):
                 else:
                     raise runtime_error
 
-    async def connect_to_ntp(self, num_attempts: int = 10) -> None:
-        """Connect to NTP server, attempt until connection is made
-
-        :param int num_attempts: The number of connection attempts to make
-        """
-
-        for attempt in range(num_attempts):
-            try:
-                super().get_time()[0]
-                return
-            except ValueError:
-                if attempt != (num_attempts - 1):
-                    print("Failed to sync with NTP server")
-                    print("Trying again in 5 seconds")
-                    await asyncio.sleep(10)
-        raise RuntimeError("Could not sync time")
+    #async def connect_to_aio(self, num_attempts: int = 10) -> None:
+    #    """Connect to NTP server, attempt until connection is made
+    #
+    #    :param int num_attempts: The number of connection attempts to make
+    #    """
+    #
+    #    for attempt in range(num_attempts):
+    #        try:
+    #            super().get_time()[0]
+    #            return
+    #        except ValueError:
+    #            if attempt != (num_attempts - 1):
+    #                print("Failed to sync with NTP server")
+    #                print("Trying again in 5 seconds")
+    #                await asyncio.sleep(10)
+    #    raise RuntimeError("Could not sync time")
 
     def _update_json(self) -> str:
         """Get new JSON from the API
@@ -91,10 +106,11 @@ class WiFi(ESP_SPIcontrol):
             "c=on;year=now;month={0}"
             ";geo=zip;zip={1};cfg=json".format(self._month_checking, location["zipcode"])
         )
+        
+        api_response: requests.Response = self.requests.get(calendar_api)
 
-        api_response: requests.Response = requests.get(calendar_api)
-
-        return api_response.json()["items"]
+        json_response = api_response.json()
+        return json_response["items"]
 
     def _parse_time_for_night(self, num_night: int) -> datetime:
         """Recursive method for getting the candle lighting time for a specific night
@@ -133,6 +149,10 @@ class WiFi(ESP_SPIcontrol):
         :return time.struct_time: The current datetime
         """
 
-        current_datetime: datetime = datetime._fromtimestamp(self.get_time()[0], False, None)
+        current_datetime: datetime = datetime.fromisoformat(self.get_time())
         current_datetime._tzinfo = timezone.utc
         return current_datetime
+        
+    def get_time(self) -> str:
+        response = self.requests.get(TIME_URL)
+        return response.text
