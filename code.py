@@ -96,12 +96,21 @@ def main() -> None:
             menorah.turn_off_candles()
 
 # Initialize candles
-shamash = DigitalInOut(board.IO14)
+shamash = DigitalInOut(board.A2)
 shamash.direction = Direction.OUTPUT
-candles_pins = ["IO4", "IO5", "IO6", "IO7", "IO17", "IO0", "IO33", "IO38"]
+candles_pins = [
+    board.RX,
+    board.SCK,
+    board.MISO,
+    board.MOSI,
+    board.A3,
+    board.SDA,
+    board.SCL,
+    board.TX,
+]
 candles_dios = []
-for gpio_num in candles_pins:
-    gpio_dio = DigitalInOut(getattr(board, gpio_num))
+for gpio_pin in candles_pins:
+    gpio_dio = DigitalInOut(gpio_pin)
     gpio_dio.direction = Direction.OUTPUT
     candles_dios.append(gpio_dio)
 menorah = Menorah(shamash, candles_dios)
