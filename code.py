@@ -4,7 +4,7 @@
 
 """
 `code.py`
-================================================================================
+=========
 
 Main code for functionality, as well as functionalities involving multiple modules
 
