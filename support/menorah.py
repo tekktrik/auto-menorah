@@ -31,14 +31,16 @@ class Menorah:
         self.candles = candles_dio
 
     @staticmethod
-    def get_menorah_off_time(lighting_time: datetime) -> datetime:
-        """Get the time at while candles should be turned off
-
+    def get_sleep_time_based_on_delta(lighting_time: datetime, current_time: datetime) -> float:
+        """Get the amount of time to sleep depend on the time delta
+        
         :param datetime lighting_time: The time at which candles should be lit for that day
-        :return datetime: The associated off time for the candles
+        :param datetime current_time: The current time
         """
-        projected_time: datetime = lighting_time + timedelta(hours=12)
-        return projected_time
+
+        time_diff: timedelta = lighting_time - current_time
+        time_diff_s = time_diff.total_seconds()
+        return 60 if time_diff_s > 60 else time_diff_s
 
     @staticmethod
     def sleep_based_on_delta(lighting_time: datetime, current_time: datetime) -> None:

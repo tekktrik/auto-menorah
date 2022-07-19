@@ -127,6 +127,16 @@ class WiFi:
 
         return lighting_times
 
+    @staticmethod
+    def get_menorah_off_time(lighting_time: datetime) -> datetime:
+        """Get the time at while candles should be turned off
+
+        :param datetime lighting_time: The time at which candles should be lit for that day
+        :return datetime: The associated off time for the candles
+        """
+        projected_time: datetime = lighting_time + timedelta(hours=12)
+        return projected_time
+
     def get_datetime(self) -> datetime:
         """Get the current datetime
 
