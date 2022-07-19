@@ -81,7 +81,7 @@ class Menorah:
         self.turn_off_candles()
         self._set_candles(night_number, True, light_shamash = light_shamash)
 
-    def set_shamash(self, candle_setting: bool):
+    def set_shamash(self, candle_setting: bool) -> None:
         """Sets the shamash setting
         
         :param bool candle_setting: The candle state to set
