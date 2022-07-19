@@ -27,11 +27,14 @@ try:
 except KeyError as err:
     raise KeyError("You need to add the Adafruit IO information!") from err
 
-TIME_URL = "https://io.adafruit.com/api/v2/%s/integrations/time/clock?x-aio-key=%s" % (aio_username, aio_key)
+TIME_URL = "https://io.adafruit.com/api/v2/%s/integrations/time/clock?x-aio-key=%s" % (
+    aio_username,
+    aio_key,
+)
 TIME_URL += "&fmt=%25Y-%25m-%25dT%25H%3A%25M%3A%25S.%25L%25z"
 
 
-#class WiFi(ESP_SPIcontrol):
+# class WiFi(ESP_SPIcontrol):
 class WiFi:
     """Class for representing the Wi-Fi and the associate functions it provides
     to the auto-menorah
@@ -43,16 +46,16 @@ class WiFi:
     :param DigitalInOut gpio0_dio: The GIO0 digital io for the ESP32, optional
     """
 
-    #def __init__(
+    # def __init__(
     #    self,
     #    spi: SPI,
     #    cs_dio: DigitalInOut,
     #    ready_dio: DigitalInOut,
     #    reset_dio: DigitalInOut,
     #    gpio0_dio: Optional[DigitalInOut] = None,
-    #):
+    # ):
     def __init__(self):
-        #super().__init__(spi, cs_dio, ready_dio, reset_dio, gpio0_dio)
+        # super().__init__(spi, cs_dio, ready_dio, reset_dio, gpio0_dio)
         self._latest_events = None
         self._month_checking = 11
         self.requests = None
@@ -84,9 +87,11 @@ class WiFi:
             "http://www.hebcal.com/hebcal?"
             "v=1;maj=on;min=off;i=off;lg=s;"
             "c=on;year=now;month={0}"
-            ";geo=zip;zip={1};cfg=json".format(self._month_checking, location["zipcode"])
+            ";geo=zip;zip={1};cfg=json".format(
+                self._month_checking, location["zipcode"]
+            )
         )
-        
+
         api_response: requests.Response = self.requests.get(calendar_api)
 
         json_response = api_response.json()
@@ -147,12 +152,12 @@ class WiFi:
         # print(current_datetime)
 
         return current_datetime
-        
+
     def get_time(self) -> str:
         """Get the time from Adafruit IO in ISO format
-        
+
         :return str: The time as an ISO format string
         """
-        
+
         response = self.requests.get(TIME_URL)
         return response.text

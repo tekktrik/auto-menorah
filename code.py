@@ -28,7 +28,7 @@ def display_error() -> None:
 
 async def display_loading(setup_status: ConnectionStatus, interval: float = 1) -> None:
     """Displays loading state using menorah lights
-    
+
     :param ConnectonStatus setup_status: The ConnectionStatus linking the setup methods
     :param float interval: How long to wait between lighting state changes
     """
@@ -46,13 +46,13 @@ async def display_loading(setup_status: ConnectionStatus, interval: float = 1) -
 
 async def setup_connections(setup_status: ConnectionStatus) -> None:
     """Connect to WiFi network and NTP server
-    
+
     :param ConnectionStatus setup_status: The ConnectionStatus linking the setup methods
     """
 
     try:
         await wifi.connect_to_network()
-        #await wifi.connect_to_ntp()
+        # await wifi.connect_to_ntp()
         setup_status.is_connected = True
     except RuntimeError:
         display_error()
@@ -95,6 +95,7 @@ def main() -> None:
             while wifi.get_datetime() < off_time:
                 menorah.sleep_based_on_delta(off_time, wifi.get_datetime())
             menorah.turn_off_candles()
+
 
 # Initialize candles
 shamash = DigitalInOut(board.A2)

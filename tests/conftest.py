@@ -12,6 +12,7 @@ sys.modules["wifi"] = wifi_module
 sys.modules["secrets"] = secrets_module
 sys.modules["socketpool"] = socket
 
+
 def pytest_addoption(parser):
     parser.addoption("--aio_username", action="store")
     parser.addoption("--aio_key", action="store")
