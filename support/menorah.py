@@ -6,16 +6,19 @@
 `menorah`
 ================================================================================
 
-Module for managing lighting and turning off candles
+Module for managing lighting and turning off candles, as well as the
+piezo speaker
 
 * Author: Alec Delaney
 """
 
 import time
 from adafruit_datetime import timedelta
+from adafruit_rtttl import play
 
 try:
     from typing import List
+    from microcontroller import Pin
     from digitalio import DigitalInOut
     from adafruit_datetime import datetime  # pylint: disable=ungrouped-imports
 except ImportError:
@@ -29,10 +32,18 @@ class Menorah:
     :param List[DigitalInOut] candles_dio: The candles digital ios
     """
 
-    def __init__(self, shamash_dio: DigitalInOut, candles_dio: List[DigitalInOut]):
+    def __init__(
+        self,
+        shamash_dio: DigitalInOut,
+        candles_dio: List[DigitalInOut],
+        piezo_pin: Pin,
+        mute_dio: DigitalInOut,
+    ):
 
         self.shamash = shamash_dio
         self.candles = candles_dio
+        self.piezo_pin = piezo_pin
+        self._mute_dio = mute_dio
 
     @staticmethod
     def get_sleep_time_based_on_delta(
@@ -98,3 +109,18 @@ class Menorah:
         """
 
         self.shamash.value = candle_setting
+
+    @property
+    def is_muted(self) -> bool:
+        """Whether the speaker is set to the muted position"""
+        return not self._mute_dio.value
+
+    def play_sound(self, sound_file: str) -> None:
+        """Play the given RTTTL file
+
+        :param str sound_file: The RTTTL sound file to play
+        """
+
+        with open(sound_file, mode="r", encoding="utf-8") as rtttl_file:
+            rtttil_contents = rtttl_file.read()
+        play(self.piezo_pin, rtttil_contents)

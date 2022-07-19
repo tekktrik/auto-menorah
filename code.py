@@ -96,6 +96,8 @@ def main() -> None:
         if lighting <= wifi.get_datetime() < off_time:
             # Manage turning the candles off at the appropriate time
             menorah.light_candles(night_index + 1)
+            if not menorah.is_muted:
+                menorah.play_sound("support/maoztzur.rtttl")
             while wifi.get_datetime() < off_time:
                 menorah.sleep_based_on_delta(off_time, wifi.get_datetime())
             menorah.turn_off_candles()
@@ -119,7 +121,10 @@ for gpio_pin in candles_pins:
     gpio_dio = DigitalInOut(gpio_pin)
     gpio_dio.direction = Direction.OUTPUT
     candles_dios.append(gpio_dio)
-menorah = Menorah(shamash, candles_dios)
+piezo_pin = board.A0
+mute_dio = DigitalInOut(board.A1)
+mute_dio.direction = Direction.INPUT
+menorah = Menorah(shamash, candles_dios, piezo_pin, mute_dio)
 
 wifi = WiFi()
 
