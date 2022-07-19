@@ -2,6 +2,16 @@
 #
 # SPDX-License-Identifier: MIT
 
+"""
+`conftest.py`
+=============
+
+Configuration file for pytest
+
+# Author(s): Alec Delaney
+
+"""
+
 import sys
 import socket
 import importlib
@@ -18,12 +28,15 @@ sys.modules["socketpool"] = socket
 
 
 def pytest_addoption(parser):
+    """Add options for the pytest command line"""
+
     parser.addoption("--aio_username", action="store")
     parser.addoption("--aio_key", action="store")
     parser.addoption("--location", action="store")
 
 
 def pytest_generate_tests(metafunc):
+    """Generate pytest tests"""
 
     aio_username = metafunc.config.option.aio_username
     aio_key = metafunc.config.option.aio_key
