@@ -2,15 +2,21 @@
 #
 # SPDX-License-Identifier: MIT
 
+"""
+`test_lighting_logic`
+=====================
+
+Tests the logic of the delays for sleeping
+
+* Author(s): Alec Delaney
+
+"""
+
 import sys
 import os
-
-current_path = os.path.normpath(__file__)
-current_path_comps = current_path.split(os.sep)
-support_path = os.sep + os.path.join(*current_path_comps[:-2])
-sys.path.append(support_path)
-
 import secrets
+import requests
+import adafruit_datetime
 
 secrets.secrets = {
     "aio_username": None,
@@ -20,19 +26,25 @@ secrets.location = {
     "zipcode": None,
 }
 
-from support import menorah
+current_path = os.path.normpath(__file__)
+current_path_comps = current_path.split(os.sep)
+support_path = os.sep + os.path.join(*current_path_comps[:-2])
+sys.path.append(support_path)
+
+# pylint: disable=wrong-import-position
+
 from support.menorah import Menorah
 from support import wifi_manager
-from support.wifi_manager import WiFi, TIME_URL
+from support.wifi_manager import WiFi
 
-import requests
-import adafruit_datetime
+# pylint: enable=wrong-import-position
 
 wifi = WiFi()
 wifi.requests = requests
 
 
 def test_lighting_times(monkeypatch, aio_username, aio_key, location):
+    """Test the lighting time logic"""
 
     secrets_secrets = {
         "aio_username": aio_username,
