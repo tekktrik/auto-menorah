@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2022 Alec Delaney
+#
+# SPDX-License-Identifier: MIT
+
 """
 `menorah`
 ================================================================================
@@ -31,18 +35,18 @@ class Menorah:
         self.candles = candles_dio
 
     @staticmethod
-    def get_menorah_off_time(lighting_time: datetime) -> datetime:
-        """Get the time at while candles should be turned off
+    def get_sleep_time_based_on_delta(
+        lighting_time: datetime, current_time: datetime
+    ) -> float:
+        """Get the amount of time to sleep depend on the time delta
 
         :param datetime lighting_time: The time at which candles should be lit for that day
-        :return datetime: The associated off time for the candles
+        :param datetime current_time: The current time
         """
-        hour_difference: datetime = 29 - lighting_time.hour
-        projected_time: datetime = lighting_time + timedelta(hours=hour_difference)
-        projected_time._minute = 0
-        projected_time._second = 0
-        projected_time._microsecond = 0
-        return projected_time
+
+        time_diff: timedelta = lighting_time - current_time
+        time_diff_s = time_diff.total_seconds()
+        return 60 if time_diff_s > 60 else time_diff_s
 
     @staticmethod
     def sleep_based_on_delta(lighting_time: datetime, current_time: datetime) -> None:
@@ -51,13 +55,16 @@ class Menorah:
         :param datetime lighting_time: The time at which candles should be lit for that day
         :param datetime current_time: The current time
         """
-        time_diff: timedelta = lighting_time - current_time
-        time_diff_s = time_diff.total_seconds()
-        time_to_sleep = 60 if time_diff_s > 60 else time_diff_s
+
+        time_to_sleep = Menorah.get_sleep_time_based_on_delta(
+            lighting_time, current_time
+        )
         if time_to_sleep > 0:
             time.sleep(time_to_sleep)
 
-    def _set_candles(self, num_candles: int, candle_state: bool, light_shamash: bool = True) -> None:
+    def _set_candles(
+        self, num_candles: int, candle_state: bool, light_shamash: bool = True
+    ) -> None:
         """Sets the state of a given number of candles
 
         :param int num_candles: The number of candles to light
@@ -82,11 +89,11 @@ class Menorah:
         :param bool light_shamash: Whether the shamash should be lit
         """
         self.turn_off_candles()
-        self._set_candles(night_number, True, light_shamash = light_shamash)
+        self._set_candles(night_number, True, light_shamash=light_shamash)
 
-    def set_shamash(self, candle_setting: bool):
+    def set_shamash(self, candle_setting: bool) -> None:
         """Sets the shamash setting
-        
+
         :param bool candle_setting: The candle state to set
         """
 
