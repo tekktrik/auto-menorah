@@ -80,7 +80,8 @@ def main() -> None:
     # Past candle lighting date, no need to do anything
     holiday_end = wifi.get_menorah_off_time(lighting_times[7])
     if wifi.get_datetime() >= holiday_end:
-        return
+        while True:
+            pass
 
     # Compare candle lighting times to current time
     for night_index, lighting in enumerate(lighting_times):
