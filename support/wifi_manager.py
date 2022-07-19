@@ -7,20 +7,16 @@ Module for managing network connections and API requests
 * Author: Alec Delaney
 """
 
-import json
 import socketpool
 import wifi
 import ssl
 import asyncio
 from secrets import secrets, location
 import adafruit_requests as requests
-import adafruit_esp32spi.adafruit_esp32spi_socket as socket
 from adafruit_datetime import datetime, timezone, timedelta
 
 try:
-    from typing import Optional, List
-    from busio import SPI
-    from digitalio import DigitalInOut
+    from typing import List
 except ImportError:
     pass
 
