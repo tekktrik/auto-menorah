@@ -1,0 +1,3 @@
+adafruit-circuitpython-datetime
+adafruit-circuitpython-asyncio
+adafruit-circuitpython-requests

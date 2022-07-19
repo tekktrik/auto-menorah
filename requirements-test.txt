@@ -1,0 +1,4 @@
+pytest
+pytest-mock
+Adafruit-Blinka
+requests
