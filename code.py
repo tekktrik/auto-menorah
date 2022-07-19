@@ -14,7 +14,6 @@ Main code for functionality, as well as functionalities involving multiple modul
 import time
 import asyncio
 import board
-from adafruit_datetime import datetime, timezone
 from digitalio import DigitalInOut, Direction
 from support.menorah import Menorah
 from support.wifi_manager import WiFi
@@ -79,7 +78,7 @@ def main() -> None:
     lighting_times = wifi.get_candle_lighting_times()
 
     # Past candle lighting date, no need to do anything
-    holiday_end = menorah.get_menorah_off_time(lighting_times[7])
+    holiday_end = wifi.get_menorah_off_time(lighting_times[7])
     if wifi.get_datetime() >= holiday_end:
         return
 
