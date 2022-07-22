@@ -16,14 +16,14 @@ import sys
 import socket
 import importlib
 
-wifi_spec = importlib.machinery.ModuleSpec("wifi", None)
-wifi_module = importlib.util.module_from_spec(wifi_spec)
+MODULE_NAMES = ["wifi", "secrets", "pwmio"]
 
-secrets_spec = importlib.machinery.ModuleSpec("secrets", None)
-secrets_module = importlib.util.module_from_spec(secrets_spec)
+for name in MODULE_NAMES:
 
-sys.modules["wifi"] = wifi_module
-sys.modules["secrets"] = secrets_module
+    _spec = importlib.machinery.ModuleSpec(name, None)
+    _module = importlib.util.module_from_spec(_spec)
+    sys.modules[name] = _module
+
 sys.modules["socketpool"] = socket
 
 
