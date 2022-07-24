@@ -65,30 +65,33 @@ def test_lighting_times(monkeypatch, aio_username, aio_key, location):
         assertion_pairs = []
 
         assertion_pairs.append(
-            (lighting_time, lighting_time - adafruit_datetime.timedelta(hours=12), 60)
+            (lighting_time, lighting_time - adafruit_datetime.timedelta(hours=12), 600)
         )
         assertion_pairs.append(
-            (lighting_time, lighting_time - adafruit_datetime.timedelta(minutes=45), 60)
+            (lighting_time, lighting_time - adafruit_datetime.timedelta(minutes=55), 600)
+        )
+        assertion_pairs.append(
+            (lighting_time, lighting_time - adafruit_datetime.timedelta(minutes=5), 60)
         )
         assertion_pairs.append(
             (lighting_time, lighting_time - adafruit_datetime.timedelta(seconds=28), 28)
         )
         assertion_pairs.append(
-            (off_time, lighting_time + adafruit_datetime.timedelta(seconds=28), 60)
+            (off_time, lighting_time + adafruit_datetime.timedelta(seconds=28), 600)
         )
         assertion_pairs.append(
-            (off_time, lighting_time + adafruit_datetime.timedelta(minutes=45), 60)
+            (off_time, lighting_time + adafruit_datetime.timedelta(minutes=55), 600)
         )
         assertion_pairs.append(
-            (off_time, lighting_time + adafruit_datetime.timedelta(hours=3), 60)
+            (off_time, lighting_time + adafruit_datetime.timedelta(hours=3), 600)
         )
         assertion_pairs.append(
-            (off_time, lighting_time + adafruit_datetime.timedelta(hours=9), 60)
+            (off_time, lighting_time + adafruit_datetime.timedelta(hours=9), 600)
         )
         assertion_pairs.append(
             (
                 off_time,
-                lighting_time + adafruit_datetime.timedelta(hours=11, minutes=15),
+                lighting_time + adafruit_datetime.timedelta(hours=11, minutes=53),
                 60,
             )
         )
