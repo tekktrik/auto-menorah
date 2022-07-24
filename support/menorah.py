@@ -89,7 +89,7 @@ class Menorah:
 
         shamash_setting = light_shamash if candle_state else False
         self.set_shamash(shamash_setting)
-        for candle in self.candles[0:num_candles]:
+        for candle in self.candles[:num_candles]:
             candle.value = candle_state
 
     def turn_off_candles(self) -> None:
