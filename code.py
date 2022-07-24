@@ -14,10 +14,12 @@ Main code for functionality, as well as functionalities involving multiple modul
 import time
 import asyncio
 import board
+from adafruit_datetime import timedelta
 from digitalio import DigitalInOut, Direction
 from support.menorah import Menorah
 from support.wifi_manager import WiFi
 from support.setup_helper import ConnectionStatus
+from settings import BURNOUT
 
 
 def display_error() -> None:
@@ -100,8 +102,15 @@ def main() -> None:
             menorah.light_candles(night_index + 1)
             if not menorah.is_muted:
                 menorah.play_sound("support/maoztzur.rtttl")
-            while wifi.get_datetime() < off_time:
-                menorah.sleep_based_on_delta(off_time, wifi.get_datetime())
+                while wifi.get_datetime() < off_time:
+                    menorah.sleep_based_on_delta(off_time, wifi.get_datetime())
+            if BURNOUT:
+                menorah.turn_off_candles()
+
+    if not BURNOUT:
+        final_off_time = lighting_times[7] + timedelta(hours=24)
+        while wifi.get_datetime() < final_off_time:
+            menorah.sleep_based_on_delta(final_off_time, wifi.get_datetime())
             menorah.turn_off_candles()
 
 
