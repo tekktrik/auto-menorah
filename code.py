@@ -40,11 +40,13 @@ async def display_loading(setup_status: ConnectionStatus, interval: float = 1) -
         for num_candles in range(1, 5):
             menorah.light_candles(num_candles, light_shamash=False)
             await asyncio.sleep(interval)
+            menorah.turn_off_candles()
         menorah.set_shamash(True)
         await asyncio.sleep(interval)
         for num_candles in range(5, 9):
             menorah.light_candles(num_candles, light_shamash=True)
             await asyncio.sleep(interval)
+            menorah.turn_off_candles()
 
 
 async def setup_connections(setup_status: ConnectionStatus) -> None:
