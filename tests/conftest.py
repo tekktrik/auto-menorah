@@ -23,7 +23,7 @@ MODULE_NAMES = [
     ("pwmio", None, ["PWMOut"]),
     ("audioio", None, ["AudioOut"]),
     ("adafruit_waveform", None, ["sine"]),
-    ("microcontroller", None, ["Pin"])
+    ("microcontroller", None, ["Pin"]),
 ]
 
 for name, parent, additionals in MODULE_NAMES:
@@ -38,8 +38,7 @@ for name, parent, additionals in MODULE_NAMES:
         for module_step in parent_path[1:]:
             parent_module = getattr(parent_module, module_step)
         setattr(parent_module, name, _module)
-        
-            
+
     sys.modules[name] = _module
 
 sys.modules["socketpool"] = socket
