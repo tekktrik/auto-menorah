@@ -61,7 +61,7 @@ class Menorah:
             return 600
         if time_diff_s > 60:
             return 60
-        return time_diff_s
+        return time_diff_s if time_diff_s > 0 else 0
 
     @staticmethod
     def sleep_based_on_delta(lighting_time: datetime, current_time: datetime) -> None:
